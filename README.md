@@ -1,7 +1,5 @@
 # Open Source Sandbox Project
 ---
-by Jakub Wawak / j.wawak@usp.pl
----
 ## Description
 An simple and easy way for creating Sandbox Enviroment for testing, deploying and detonating maleware, malicious ULRs and more.
 ## Project ovewiew
