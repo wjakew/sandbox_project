@@ -8,3 +8,4 @@ An simple and easy way for creating Sandbox Enviroment for testing, deploying an
 ### Folders
 1. scripts - all scripts for creating / testing and detonating in enviroment.
 2. documentation - documentation for the project components
+3. file server - simple web app for uploading files to the server
