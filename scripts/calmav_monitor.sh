@@ -6,11 +6,17 @@ REPORT_DIR="/home/vpn/takeit"  # Directory to save scan reports
 
 # Ensure ClamAV is installed
 if ! command -v clamscan &> /dev/null; then
-    echo "ClamAV (clamscan) is not installed. Please install it first."
+    echo "Error: ClamAV (clamscan) is not installed. Please install it first."
     exit 1
 fi
 
-# Check if the directories exist, create if not
+# Ensure inotifywait is installed
+if ! command -v inotifywait &> /dev/null; then
+    echo "Error: inotifywait is not installed. Please install inotify-tools."
+    exit 1
+fi
+
+# Check if directories exist, create if necessary
 if [ ! -d "$WATCH_DIR" ]; then
     echo "Error: Directory '$WATCH_DIR' does not exist."
     exit 1
@@ -23,7 +29,9 @@ fi
 
 # Ensure ClamAV database is up-to-date
 echo "Updating ClamAV database..."
-freshclam
+if ! freshclam; then
+    echo "Warning: freshclam failed. Ensure the ClamAV database is updated."
+fi
 
 echo "Monitoring directory: $WATCH_DIR"
 echo "Scan reports will be saved in: $REPORT_DIR"

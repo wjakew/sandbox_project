@@ -10,8 +10,23 @@ An simple and easy way for creating Sandbox Enviroment for testing, deploying an
 3. file server - simple web app for uploading files to the server
 ---
 ### Deployment instructions
+
 1. Create a folder in the user directory for storing uploaded files and reports `mkdir uploads' and 'mkdir reports`
  save the absolute pathes for later. Open `nano clamav_monitor.sh` and set paths to storing and scanning with absolute pathes.
+
+### Prepare ClamAV Enviroment
+- Install package for creation notification:
+```bash
+sudo apt-get install inotify-tools  # Debian/Ubuntu
+sudo yum install inotify-tools      # RHEL/CentOS
+sudo dnf install inotify-tools      # Fedora
+```
+- Prepare default clamav configuration:
+```bash
+sudo cp /etc/clamav/clamd.conf.sample /etc/clamav/clamd.conf
+sudo systemctl restart clamav-daemon
+```
+
 2. Set calmav_monitor.sh script to be executable with `sudo chmod +x calmav_monitor.sh`.
 3. Create a service file for systemd using nano: `sudo nano /etc/systemd/system/clamav-monitor.service`
 4. Add the following content:
